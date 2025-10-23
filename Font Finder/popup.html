@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Font Finder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    body{font-family: Arial, Helvetica, sans-serif; min-width:260px; padding:12px; box-sizing:border-box;}
+    h1{font-size:18px;margin:0 0 8px}
+    #status{margin:8px 0;font-size:13px;color:#333}
+    button{padding:8px 12px;border-radius:6px;border:1px solid #888;background:#f3f3f3;cursor:pointer}
+    button.active{background:#0b7dda;color:white;border-color:#066ea8}
+    footer{margin-top:12px;font-size:11px;color:#666;text-align:center}
+    .row{display:flex;gap:8px;align-items:center}
+    .hint{font-size:12px;color:#555;margin-top:8px}
+  </style>
+</head>
+<body>
+  <h1>Font Finder</h1>
+  <div class="row">
+    <button id="toggleBtn">Activate</button>
+    <button id="lockBtn">Click to Lock</button>
+  </div>
+  <div id="status">Status: <span id="state">Inactive</span></div>
+  <div class="hint">Instructions: Click <b>Activate</b>, then hover over elements and click to lock the font info. Click <b>Deactivate</b> to stop.</div>
+  <footer>Made by Arti Verma</footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
