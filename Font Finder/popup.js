@@ -32,7 +32,7 @@ lockBtn.addEventListener('click', async () => {
   await sendMessage({action: 'setLock', locked});
 });
 
-// when popup opens, query current state (best-effort)
+
 document.addEventListener('DOMContentLoaded', async () => {
   const [tab] = await chrome.tabs.query({active:true, currentWindow:true});
   if (!tab) return;
