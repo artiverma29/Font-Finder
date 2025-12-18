@@ -70,23 +70,23 @@ function onMove(e) {
 }
 
 function onClick(e) {
-  // if locked, clicking unlocks
+  
   if (!enabled) return;
   if (!locked) {
-    // lock to current element and show persistent tooltip near element
+    
     const el = document.elementFromPoint(e.clientX, e.clientY);
     if (!el) return;
     locked = true;
     showLockedInfo(el);
-    // prevent navigation when clicking links
+    
     e.preventDefault();
     e.stopPropagation();
   } else {
-    // unlock
+    
     locked = false;
     if (tooltip) tooltip.style.opacity = '0';
   }
-  // send state back so popup can update if needed
+  
   chrome.runtime.sendMessage({type:'stateUpdate', active: enabled, locked});
 }
 
@@ -94,7 +94,7 @@ function showLockedInfo(el) {
   const rect = el.getBoundingClientRect();
   const info = getFontInfo(el);
   if (!info) return;
-  // position tooltip near element
+  
   const x = Math.min(window.innerWidth - 340, Math.max(8, rect.left + window.scrollX));
   const y = Math.min(window.innerHeight - 120, Math.max(8, rect.top + window.scrollY));
   updateTooltip(x, y, info);
@@ -123,13 +123,13 @@ function disable() {
   document.removeEventListener('keydown', onKeyDown, true);
   if (tooltip) {
     tooltip.style.opacity = '0';
-    // remove after short delay
+    
     setTimeout(() => { removeTooltip(); }, 200);
   }
 }
 
 function onKeyDown(e) {
-  // press Esc to exit / unlock
+  
   if (e.key === 'Escape') {
     if (locked) {
       locked = false;
@@ -141,7 +141,7 @@ function onKeyDown(e) {
   }
 }
 
-// Listen for messages from popup
+
 chrome.runtime.onMessage.addListener((msg, sender, sendResp) => {
   if (msg && msg.action) {
     if (msg.action === 'activate') {
@@ -157,11 +157,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResp) => {
       sendResp({active: enabled, locked});
     }
   }
-  // keep connection open only if we will respond async
+  
   return false;
 });
 
-// Also respond to runtime messages (for popup state sync)
+
 chrome.runtime.onMessage.addListener((m) => {
-  // no-op placeholder; handled above
+  
 });
